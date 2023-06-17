@@ -2,5 +2,5 @@
 
 ## Usage
 ``` bash
-> npx degit besameljs/solid-besamel-templates/default-template <project-name>
+> npx degit besameljs/solid-besamel-templates/default <project-name>
 ```
