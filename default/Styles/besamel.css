@@ -289,11 +289,6 @@ ul.plain {
     .responsive li {
         padding: 2px 0px;
     }
-
-    .tile {
-        margin: 0;
-        padding: 0 !important;
-    }
 }
 
 @media only screen and (min-width: 768px) {
@@ -414,7 +409,6 @@ ul.plain {
 }
 
 
-
 /* * 2.8 Text position */
 .txt-l {
     text-align: left;
@@ -428,21 +422,14 @@ ul.plain {
 /* * 3 TYPOGRAPHY */
 /* TODO? Nechat to takhle? */
 .icon,
-.input-icon,
-.icon-btn {
+.input-icon {
     font-family: 'Material Icons';
     background-color: transparent;
     border: none;
-    color: inherit;
+    color: var(--font-color);
     /* padding: 10px 10px; */
     font-size: calc(1.50rem * var(--font-multiplier));
-    padding-right: 5px;
 
-}
-
-.icon-btn {
-    padding: 3px;
-    margin: 0;
 }
 
 .input-icon {
@@ -520,11 +507,13 @@ h1.responsive,
 h1.responsive-heading {
     font-size:
         clamp(1rem, calc(2rem * var(--font-multiplier) + var(--font-responsivness)), 7rem);
+
+
 }
 
 h2.responsive,
 h2.responsive-heading {
-    font-size: clamp(1.25rem, calc(2rem * var(--font-multiplier) + var(--font-responsivness) * 0.5), 5.5rem);
+    font-size: clamp(1.25rem, calc(2rem * var(--font-multiplier) + var(--font-responsivness) * 0.8), 5.5rem);
 }
 
 h3.responsive,
@@ -598,13 +587,10 @@ nav {
 
 }
 
-nav .navbar,
-nav .banner,
-nav .toolbar {
-    z-index: 18;
-}
-
 /* * 4.2.1 Banner */
+.banner p {
+    margin: 0 !important;
+}
 
 /* * 4.2.2 Navbar */
 .navbar>*>*,
@@ -616,11 +602,6 @@ nav .toolbar {
     position: relative;
     align-items: stretch;
 }
-
-nav div {
-    height: 100%;
-}
-
 
 .navbar .nav-dropdown>a {
     height: 100%;
@@ -804,6 +785,11 @@ footer {
     cursor: pointer;
 }
 
+.accordion-content {
+    transition: height .2s ease;
+    height: 500px;
+    max-height: 250px;
+}
 
 .accordion-plain button.accordion-header {
     justify-content: flex-start;
@@ -883,7 +869,7 @@ select {
 button {
     display: flex;
     align-items: center;
-    justify-content: center
+
 }
 
 button:not(.icon-btn).large,
@@ -1199,6 +1185,10 @@ span.leader {
     margin-bottom: 6px;
     border-bottom-style: dotted;
     height: auto;
+    flex-grow: 1;
+    flex: 1;
+    min-width: 20px;
+
 }
 
 span.leader.dashed {
@@ -1620,33 +1610,66 @@ ul a.active {
     font-weight: bold;
 }
 
-.sidebar a {
-    width: 100%;
+
+
+/* ! Přesuň */
+.lightbox,
+.lightbox .modal {
+    max-width: unset;
+}
+
+.lightbox .modal {
+    background: none;
+}
+
+.lightbox .offcanvas-parent:first-child {
+    backdrop-filter: blur(10px);
+}
+
+.lightbox .w-12.h-12 {
+    /* center */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.lightbox img {
+
+    width: inherit !important;
+    height: inherit !important;
 }
 
 
-/* TODO! Někam zařaď! */
-.sidebar * {
-    text-transform: capitalize;
+.lightbox .carousel>* {
+    max-height: 80vh !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.sidebar ul {
-    margin-top: 0;
+.lightbox .carousel>* img {
+    max-height: 80vh;
+    max-width: 90vw;
+
+    /* Keep the aspect ration */
+    width: auto !important;
+
+
 }
 
-.sidebar .icon {
-    text-transform: none;
+
+.lightbox .left-control {
+    position: fixed;
+    left: 50px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
-
-
-/* ! Zarad! */
-hr {
-    height: 1px;
-    width: 100%;
-}
-
-.banner p {
-    margin: 0 !important;
-
+.lightbox .right-control {
+    position: fixed;
+    right: 50px;
+    top: 50%;
+    transform: translateY(-50%);
 }

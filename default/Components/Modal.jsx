@@ -17,22 +17,15 @@ function ModalWrap(props) {
     }
 
     return (<>
-
         {merged.opened() &&
-            <div class="modal-parent" >
-                <button className="modal-background invisible" onclick={handleClose}  >
+            <div class="offcanvas-parent" >
+                <button className="" onclick={handleClose}  >
                 </button>
-                <div className="modal">
+                <div className="offcanvas modal">
                     {props.children}
                 </div>
             </div>
         }
-
-
-
-
-
-
     </>
     );
 }

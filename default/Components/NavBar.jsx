@@ -1,23 +1,24 @@
+import { A, } from "@solidjs/router"
 import { createSignal, createEffect } from "solid-js";
-import { A, useNavigate } from "@solidjs/router";
+
+import Img_26 from "../Imgs/Img_18.png";
 
 
 function NavBar() {
-    const navigate = useNavigate();
 
     const [showBanner, setShowBanner] = createSignal(true);
+
     const [drawerShown, setDrawerShown] = createSignal(false);
 
-    // TODO: When adding banner:
-    // 1. Set Drawer signal to true (line 9)
-    // 2. In line cca 38, there should be a banner - edit it
+    function updateHeight(useLessProps = undefined) {
+        // Navbar height + banner height
+        if (showBanner()) {
 
-    // TODO: When removing banner:
-    // 1. Set Drawer signal to false (line 9)
-    // 2. It's preferred to keep the banner code in line cca 38, but you can remove it
+            document.documentElement.style.setProperty('--navbar-height', `${document.querySelector(".navbar").clientHeight + document.querySelector(".banner").clientHeight}px`);
+        } else {
+            document.documentElement.style.setProperty('--navbar-height', `${document.querySelector(".navbar").clientHeight}px`);
+        }
 
-    function updateHeight() {
-        document.documentElement.style.setProperty('--navbar-height', `${document.querySelector("nav").clientHeight - 6}px`);
     }
 
     createEffect(() => {
@@ -25,84 +26,178 @@ function NavBar() {
     });
 
 
-    // Used to close drawer (on mobile) when user clicks on a link
-    function myRedirect(url) {
-        // CLose the drawer
-        setDrawerShown(false);
-
-        // Redirect
-        navigate(url);
-    }
 
     return (<>
-        <nav class='always-on-top '> {/* If always on top - put class "always-on-top" */}
+
+        <nav class='always-on-top '>
+
             {showBanner() &&
                 <div className="banner">
+
                     <div className="left">
                     </div>
                     <div className="center">
-                        <p>
-                            Banner txt
-                        </p>
+                        <header>Nové menu najdete <a href="#">zde</a>
+
+                        </header>
                     </div>
-                    <div className="right row">
-                        <button className="icon-btn icon small " onClick={() => setShowBanner(false)} >
+
+                    <div className="right">
+
+                        <button className="icon small " onClick={() => setShowBanner(false)}>
                             close
                         </button>
                     </div>
+
                 </div>
             }
 
             <div className="navbar ">
-                <div className="left " >
-                    <A href={"/"} active="adfsghjklkjh">
-                        LOGO
+
+                <div className="left">
+                    <A href="/#" end={true}>
+                        <span className="icon-btn ">
+                            coffee
+                        </span>
+                        <header>Kavárna ZadeK</header>
+
                     </A>
                 </div>
-
                 <div className="center"></div>
-
                 <div className="right">
                     <div className="m-hidden">
-                        <A href={"/"} end={true}>Home</A>
-                        <A href={"/docs"} > Link one</A>
-                        <A href={"/examples"} >Link 2</A>
-                        <A href={"/theme-creator"}>Link 3</A>
+                        <A href="/" end={true}>
+                            Home
+                        </A>
+                        <A href="/abc" >
+                            abc
+                        </A>
+                        <A href="/components">componentss</A>
+                        <A href="/form">Form</A>
+                        <div className="nav-dropdown">
+
+                            <A href="/sections" className="dropdown-heading">Sections</A>
+                            <div className="dropdown-window">
+                                <A href="/sections/footers">Footers</A>
+                                <A href="/dropdown">Dropdown</A>
+                                <A href="sections/backgrounds">Backgrounds</A>
+                            </div>
+                        </div>
+                        <div className="nav-dropdown">
+                            <p className="dropdown-heading">Dropdown</p>
+                            <div className="dropdown-window">
+                                <A href="/dropdown">Dropdown</A>
+                                <A href="/dropdown">Dropdown</A>
+                            </div>
+                        </div>
+
                     </div>
                     <div className="pc-hidden">
-                        <button className="icon-btn large " id="menu-opener" style="color:var(--secondary-color)" onclick={() => setDrawerShown(!drawerShown())}>
+                        <button className="icon-btn large " style="margin-right:-15px" id="menu-opener" onclick={() => setDrawerShown(!drawerShown())}>
+
                             menu
+
                         </button>
                     </div>
                 </div>
 
-            </div >
-            <div className={"nav-drawer fullscreen center pos " + (drawerShown() ? " opened" : " closed")}>
-                <div className="drawer-content center " >
+            </div>
 
-                    <ul class="responsive">
-                        <li>
-                            <A href={"/"} onclick={() => myRedirect("/")} end={true}>Home</A>
-                        </li>
-                        <li>
-                            <A href={"/docs"} onclick={() => myRedirect("/docs")} > Docs </A>
-                        </li>
-                        <li>
-                            <A href={"/examples"} >Examples</A>
-                        </li>
-                        <li>
-                            <A href={"/theme-creator"}>Theme creator</A>
-                        </li>
-                    </ul>
+
+            <div className="toolbar">
+
+                <div className="left ">
+                    <div className="m-hidden row">
+
+                        <button class="tool">Ahoj</button>
+
+                        <A href="#">Ahoj</A>
+                        <A href="#"><p class="g-icon">search</p></A>
+                        <A href="#"><p class="g-icon">cookie</p></A>
+                        {/* <A href="#"><p class="g-icon">mail </p></A> */}
+                        <button className="icon tool">edit</button>
+                    </div>
 
                 </div>
 
-                {/* <div className="to-s padding-large" style="height: fit-content !important;">
-                    <A href="https://github.com/Ninjaondra321/Besamel" class="">Github</A>
-                </div> */}
-            </div>
-        </nav >
 
+                <div className="middle">
+                    <input type="text" name="ads" id="afds" placeholder="FileName" class="editable" />
+                </div>
+
+                <div className="right">
+                    <div className="m-hidden">
+                        <A href="#">Ahoj</A>
+                        <A href="#"><p class="g-icon">search</p></A>
+                        <A href="#"><p class="g-icon">cookie</p></A>
+                    </div>
+
+                    <div className="pc-hidden">
+                        <A href="#"><p class="g-icon">expand</p></A>
+                    </div>
+
+                </div>
+            </div>
+
+
+            {/* <div
+                className={drawerShown() ? "drawer pc-hidden opened" : "drawer pc-hidden closed"}
+            >
+                <A href="/">Home</A>
+                <A href="/abc">abc</A>
+                <div className="accordion">
+                    <div className="accordion-item closed" >
+
+                        <button className="accordion-header"
+                            onTouch={(e) => { e.target.parentElement.classList.toggle("closed"); }}
+                            onClick={(e) => { e.target.parentElement.classList.toggle("closed"); }}
+                        >
+                            Accordion
+                        </button>
+                        <div className="accordion-content">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, sequi quaerat. Possimus hic, quaerat ut eos repellat sint minus doloremque beatae fuga mollitia nulla perferendis commodi quibusdam sequi? Saepe, est!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div> */}
+
+            <div
+                // className={drawerShown() ? " nav-drawer drawer pc-hidden opened" : "nav-drawer drawer pc-hidden closed"}
+                className={"nav-drawer fullscreen  bg" + (drawerShown() ? " opened" : " closed")}
+            >
+                <img src={Img_26} style={{ filter: "opacity(0.4)" }} class="make-section-bg  default darken-more" />
+
+                <div className="drawer-content to-left">
+
+                    <A href="/">Home</A>
+                    <A href="/abc">abc</A>
+                    <A href="/components">Components</A>
+                    <div className="accordion-plain">
+                        <div className="accordion-item closed center " >
+
+                            <button className="accordion-header h4"
+                                onTouch={(e) => { e.target.parentElement.classList.toggle("closed"); }}
+                                onClick={(e) => { e.target.parentElement.classList.toggle("closed"); }}
+                            >
+                                Accordion
+
+                            </button>
+                            <div className="accordion-content">
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, sequi quaerat. Possimus hic, quaerat ut eos repellat sint minus doloremque beatae fuga mollitia nulla perferendis commodi quibusdam sequi? Saepe, est!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+        </nav >
     </>);
 }
 

@@ -20,6 +20,10 @@ import HomePage from '../Pages/HomePage';
 const CookiesPage = lazy(() => import('../Pages/CookiesPage'));
 const Page404 = lazy(() => import('../Pages/page404'));
 
+// Styles
+import '../Styles/besamel.css';
+import '../Styles/styles.css';
+
 
 // TODO: Change this to your own IDs
 const cookiesLocation = "COOKIES-BESAMEL-DOCS";
